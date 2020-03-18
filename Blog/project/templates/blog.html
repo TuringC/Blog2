@@ -504,9 +504,9 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-7">
                             <div class="card">
-                                <img class="card-img-top" src="static/img/bg/10.jpg" alt="">
+                                <img class="card-img-top" src="static/img/bg/lzx.jpg" alt="">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{ articles[-1].title }}</h4>
+                                    <h4 class="card-title">{{ articles[-1].title }}[Top]</h4>
                                     <h6 class="card-subtitle">by {{ articles[-1].author }}</h6>
 
                                     <p class="card-text">&emsp;&emsp;{{ articles[-1].body }}</p>
@@ -524,9 +524,6 @@
                             {% for article in articles %}
                             {% if not loop.last %}
                             <div class="card">
-                                {% if article.id == 1 %}
-                                    <img class="card-img-top" src="static/img/bg/10.jpg" alt="">
-                                {% endif %}
                                 <div class="card-body">
                                     <h4 class="card-title">{{ article.title }}</h4>
                                     <h6 class="card-subtitle">by {{ article.author }}</h6>
