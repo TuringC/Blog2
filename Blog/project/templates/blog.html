@@ -478,16 +478,16 @@
 
             <div class="themes">
     <div class="scrollbar-inner">
-        <a href="" class="themes__item active" data-sa-value="1"><img src="img/bg/1.jpg" alt=""></a>
-        <a href="" class="themes__item" data-sa-value="2"><img src="img/bg/2.jpg" alt=""></a>
-        <a href="" class="themes__item" data-sa-value="3"><img src="img/bg/3.jpg" alt=""></a>
-        <a href="" class="themes__item" data-sa-value="4"><img src="img/bg/4.jpg" alt=""></a>
-        <a href="" class="themes__item" data-sa-value="5"><img src="img/bg/5.jpg" alt=""></a>
-        <a href="" class="themes__item" data-sa-value="6"><img src="img/bg/6.jpg" alt=""></a>
-        <a href="" class="themes__item" data-sa-value="7"><img src="img/bg/7.jpg" alt=""></a>
-        <a href="" class="themes__item" data-sa-value="8"><img src="img/bg/8.jpg" alt=""></a>
-        <a href="" class="themes__item" data-sa-value="9"><img src="img/bg/9.jpg" alt=""></a>
-        <a href="" class="themes__item" data-sa-value="10"><img src="img/bg/10.jpg" alt=""></a>
+        <a href="" class="themes__item active" data-sa-value="1"><img src="static/img/bg/1.jpg" alt=""></a>
+        <a href="" class="themes__item" data-sa-value="2"><img src="static/img/bg/2.jpg" alt=""></a>
+        <a href="" class="themes__item" data-sa-value="3"><img src="static/img/bg/3.jpg" alt=""></a>
+        <a href="" class="themes__item" data-sa-value="4"><img src="static/img/bg/4.jpg" alt=""></a>
+        <a href="" class="themes__item" data-sa-value="5"><img src="static/img/bg/5.jpg" alt=""></a>
+        <a href="" class="themes__item" data-sa-value="6"><img src="static/img/bg/6.jpg" alt=""></a>
+        <a href="" class="themes__item" data-sa-value="7"><img src="static/img/bg/7.jpg" alt=""></a>
+        <a href="" class="themes__item" data-sa-value="8"><img src="static/img/bg/8.jpg" alt=""></a>
+        <a href="" class="themes__item" data-sa-value="9"><img src="static/img/bg/9.jpg" alt=""></a>
+        <a href="" class="themes__item" data-sa-value="10"><img src="static/img/bg/10.jpg" alt=""></a>
     </div>
 </div>
 
@@ -501,13 +501,32 @@
                         <small>This is TuringC's blog.</small>
                         {% endif %}
                     </header>
-
                     <div class="row">
                         <div class="col-lg-8 col-md-7">
-                            {% for article in articles %}
                             <div class="card">
-<!--                                <img class="card-img-top" src="demo/img/blog/1.jpg" alt="">-->
+                                <img class="card-img-top" src="static/img/bg/10.jpg" alt="">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ articles[-1].title }}</h4>
+                                    <h6 class="card-subtitle">by {{ articles[-1].author }}</h6>
 
+                                    <p class="card-text">&emsp;&emsp;{{ articles[-1].body }}</p>
+
+                                    <a href="{{ url_for('blog_detail', id=articles[-1].id, personal_page=personal_page) }}" class="card-link">Read More...</a>
+                                    {% if current_user.is_authenticated and personal_page %}
+<!--                                    <a href="{{ url_for('delete', id=articles[-1].id, personal_page=personal_page) }}" class="card-link">Delete</a>-->
+                                    <form method="post" action="{{ url_for('delete', id=articles[-1].id) }}">
+                                        {{ form.csrf_token }}<br>
+                                        {{ form.submit() }}
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% for article in articles %}
+                            {% if not loop.last %}
+                            <div class="card">
+                                {% if article.id == 1 %}
+                                    <img class="card-img-top" src="static/img/bg/10.jpg" alt="">
+                                {% endif %}
                                 <div class="card-body">
                                     <h4 class="card-title">{{ article.title }}</h4>
                                     <h6 class="card-subtitle">by {{ article.author }}</h6>
@@ -524,6 +543,7 @@
                                     {% endif %}
                                 </div>
                             </div>
+                            {% endif %}
                             {% endfor %}
 <!--                            <div class="card">-->
 <!--                                <img class="card-img-top" src="demo/img/blog/2.jpg" alt="">-->
